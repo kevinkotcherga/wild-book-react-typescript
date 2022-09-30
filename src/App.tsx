@@ -3,8 +3,10 @@ import './App.css';
 import axios from 'axios';
 import { IWilder } from '../interfaces';
 import Wilder from './components/Wilder';
+import AddWilder from './components/AddWilder';
+import AddSkill from './components/AddSkill';
 
-function App() {
+function App(): JSX.Element {
 	const [wilders, setWilders] = useState<IWilder[]>([]);
 
 	const fetchData = async (): Promise<void> => {
@@ -38,7 +40,11 @@ function App() {
 					))}
 				</section>
 			</main>
-			{/* <AddWilder onWilderCreated={() => fetchData()} /> */}
+      <h2>Ajouter un Wilder</h2>
+			<AddWilder fetchData={() => fetchData()} />
+      <br/>
+      <h2>Ajouter un Skill</h2>
+      <AddSkill fetchData={() => fetchData()}/>
 			<footer>
 				<div className="container">
 					<p>&copy; 2022 Wild Code School</p>

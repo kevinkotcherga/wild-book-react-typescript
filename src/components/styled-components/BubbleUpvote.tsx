@@ -1,4 +1,6 @@
-.votes {
+import styled from 'styled-components'
+
+export const BubbleUpvote = styled.span<{upvote: boolean, up: boolean}>`
   /* Center the content */
   align-items: center;
   display: flex;
@@ -11,5 +13,6 @@
   /* Rounded border */
   border-radius: 9999px;
   height: 20px;
-  width: 20px;
-}
+  width: ${props => props.upvote ? "20px" : "10px"};
+
+`

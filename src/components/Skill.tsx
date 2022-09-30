@@ -1,17 +1,27 @@
 import React from 'react';
-import styles from './Skill.module.css';
 import { ISkills } from '../../interfaces';
+import { BubbleVote } from './styled-components/BubbleVote';
+import { BubbleUpvote } from './styled-components/BubbleUpvote';
+import axios from 'axios';
 
-// interface IProps {
-//   name: string;
-//   upvote: number
-// }
+const Skill = (props: ISkills): JSX.Element => {
+  const addVote = async (): Promise<void> => {
+    await axios.put(`http://localhost:5000/api/upvotes/${props.id}/upvote`);
+    props.fetchData();
+  }
 
-const Skill = (props: ISkills) => {
+  const removeVote = async (): Promise<void> => {
+    await axios.put(`http://localhost:5000/api/upvotes/${props.id}/negativevote`);
+    props.fetchData();
+  }
+
 	return (
 		<li>
+      <BubbleVote onClick={addVote}>+</BubbleVote>
       {props.skill.name}
-			<span className={styles.votes}>{props.upvote}</span>
+			<BubbleUpvote up={false} upvote={true}>{props.upvote}</BubbleUpvote>
+      <BubbleVote onClick={removeVote}>-</BubbleVote>
+      <button>Supprimer skill</button>
 		</li>
 	);
 };
